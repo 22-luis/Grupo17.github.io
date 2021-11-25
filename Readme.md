@@ -1,117 +1,70 @@
-# Proyecto final - 20% 
+# Getting Started with Create React App
 
-> **Objetivo**
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Diseñar una interfaz que permita consumir datos de una API externa, utilizando REACT, aplicando buenas prácticas y trabajo en equipo. 
+## Available Scripts
 
-> **Desarrollo** 
+In the project directory, you can run:
 
-Implementar REACT  para el diseño de una interfaz para el usuario y para la administración de los datos los cuales serán consumidos desde una API (la cual sera proporcionada en clases). 
-La interfaz deberá proporcionar un inicio de sesión para el administrador.
-La interfaz de usuario permitirá poder marcar/desmarcar a favoritos, marcar/desmarcar me gusta, sobre los productos o servicios que se consuman desde la API. 
-La interfaz de administrador permitirá poder realizar todas las operaciones CRUD (Create Read Update Delete)  utilizando la API. 
+### `npm start`
 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Se debe tomar en cuenta las características necesarias para la manipulación de datos: 
-* Validaciones (campos vacíos, formatos, tipos de datos, entre otros que se consideren importantes para la funcionalidad), 
-* División de componentes en React. 
-* Estilo adaptado a la temática (utilizar module css o tailwindcss)
-* Adaptabilidad a diferentes tamaños (celular, tablet, computadora, indicar el modelo de cada uno al cual es funcional) 
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
+### `npm test`
 
-> **Indicaciones**
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-1. Los equipos de trabajo seran formados nuevamente, para ellos debe acceder a Moodle el dia viernes 05 de noviembre 2021, e inscribirse.
-2. Inscribirse en la tarea de GitHubClassroom como: Equipo#, favor tomar en cuenta este punto.
-3. La API estara disponible en Moodle a partir del lunes 08 de noviembre 2021.
-4. Realizar los commit necesarios por cada miembro del equipo. 
-5. Si se trabaja en ramas separadas (recomendable), el proyecto final debe estar en la rama main.
-6. Implementar React y las librerías que se consideren necesarias para la funcionalidades solicitadas.
-7. Para la comunicación con la API unicamente utilizar Fetch o Axios.
-8. Aplicar las funcionalidades necesarias para la manipulación de datos. 
-9. Investigar el uso de GitHub Pages con React e implementar para mostrar el proyecto final en la defensa. 
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-> **Investigar**
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-El uso de GitHub Pages con React, para presentar el proyecto final. 
-El uso de React Router para enrutamiento de sitios SPA.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-> **Presentación de proyectos**
+### `npm run eject`
 
-* Fecha limite para el proyecto entrega del proyecto domingo 28 de   noviembre de 2021.
-* Los equipos deben de seleccionar en el agendador en Moodle el bloque de hora disponible para su presentación, a partir del 10 de noviembre 2021 estara disponible el recurso.
-* Solo se permitirá un cambio de fecha u hora por equipo.(Deberan comunicar a docente)
-* La presentación de proyectos será en la semana del 29 de noviembre al 03 de diciembre.
-* Cada equipo tendrá 15 minutos para la presentación y 5 minutos para preguntas. 
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-<br />
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-<table>
-  <tr>
-   <td><strong>Criterios</strong>
-   </td>
-   <td><strong>Porcentaje</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>Diseño de interfaz que facilita el consumo de la API, utilizando React. 
-   </td>
-   <td>15%
-   </td>
-  </tr>
-  <tr>
-   <td>Estilo aplicado a la temática (ModuleCSS o Tailwind)
-   </td>
-   <td>15%
-   </td>
-  </tr>
-  <tr>
-   <td>Adaptabilidad a diferentes tamaños (celular, tablet, computadora, indicar el modelo de cada uno al cual es funcional)
-   </td>
-   <td>10%
-   </td>
-  </tr>
-  <tr>
-   <td>Validaciones (campos vacíos, formatos, tipos de datos, entre otros que se consideren importantes para la funcionalidad),
-   </td>
-   <td>10%
-   </td>
-  </tr>
-  <tr>
-   <td>Implementación de CRUD, utilizando API.
-   </td>
-   <td>20%
-   </td>
-  </tr>
-  <tr>
-   <td>Contribución de los miembros en Github (se verifica el trabajo en equipo a traves de los commit generados por cada miembro)
-   </td>
-   <td>10% 
-   </td>
-  </tr>
-  <tr>
-   <td>Defensa individual
-   </td>
-   <td>20% 
-   </td>
-  </tr>
-</table>
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-<br/>
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-> **Importante**
+## Learn More
 
-* A todos los equipos se les permitira un cambio de fecha u hora para la defensa, en caso que la fecha seleccionada la primerza vez algunos de los miembros tuviese problemas.
-* Si un miembro del equipo no presenta commits en el repositorio, no se podrá evaluar la participación, únicamente se le aplicará la nota de defensa. 
-* Si un miembro del equipo no presenta commits solo se afecta el puntaje en el criterio de trabajo en equipo. 
-* Los miembros del equipo pueden trabajar en ramas separadas (recomendable), pero el que se evaluará será el proyecto que se encuentre en la rama main. 
-* Recordar que si se ha trabajado en ramas separadas debe de haber un responsable que realice el merge y se agrega a la rama main el proyecto final.
-* El proyecto final deberá estar en la rama main.  
-* No habrá consultas 3 días antes de la presentación del proyecto. 
-* Todo problema personal o de otro carácter, favor indicarlo a la docente, para tener las consideraciones del mismo, pero deberá presentar justificación y evidencia. 
-* No hacer cambios de grupo, sin antes consultar y justificar a la docente. 
-* Miembro del equipo que no se encuentre en el equipo designado según Moodle, no se evaluará, debido a que no son permitidos los cambios sin justificación y comunicación al docente. 
-* Las notas estarán disponibles en el Moodle el a partir del 04 de diciembre 2021. 
-* Para realizar revisión por grupo deberá agendar un espacio en el Moodle, a partir del sabado 04 de diciembre 2021, el único día para revisiones será el 06 de diciembre 2021. 
-* Cierre de materia 08 de diciembre 2021. 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
