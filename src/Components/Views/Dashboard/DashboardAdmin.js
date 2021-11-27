@@ -4,8 +4,9 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
-import Posts from "../Posts/Posts";
-
+import {useState, useEffect} from "react";
+import axios from "axios";
+import PostsContainer from "../Posts/renderPost";
 
 const user = {
   name: "Tom Cook",
@@ -30,6 +31,21 @@ function classNames(...classes) {
 export const DashboardAdmin = () => {
   const navigate = useNavigate();
   const context = useUserContext();
+  const [who, setWho] = useState();
+
+  useEffect(() => {
+    async function getIdentity() {
+        const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
+            headers: {
+                Authorization: `Bearer ${user}`,
+            },
+        });
+
+        setWho(data.username);
+    }
+
+    getIdentity();
+}, []);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -235,7 +251,7 @@ export const DashboardAdmin = () => {
           {/* Replace with your content */}
           <div className="px-4 py-6 sm:px-0">
         
-            <Posts />
+            <PostsContainer username={who}/>
           </div>
           {/* /End replace */}
         </div>

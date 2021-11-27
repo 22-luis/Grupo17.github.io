@@ -5,7 +5,8 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Posts from "../Posts/Posts";
+import axios from "axios";
+import PostsContainer from "../Posts/renderPost";
 
 const user = {
   name: "Tom Cook",
@@ -33,6 +34,20 @@ function classNames(...classes) {
 export const DashboardUser = () => {
   const navigate = useNavigate();
   const context = useUserContext();
+  const [who, setWho] = useState();
+
+  useEffect(() => {
+    async function getWho() {
+        const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        setWho(data.username);
+    }
+
+    getWho();
+}, []);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -53,7 +68,9 @@ export const DashboardUser = () => {
       console.log("soy yo ->>>>" + context.user.role);
       navigate(routes[context.user.role] ?? "/"); //Esto no se como lo hace se puede cambiar
     }
+
   }, [context.user]);
+
 
   return (
     <div className="min-h-full">
@@ -228,7 +245,7 @@ export const DashboardUser = () => {
           {/* Replace with your content */}
 
 
-          <Posts />
+          <PostsContainer username={who}/>
 
           <div />
 
