@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../Context/UserContext";
 import axios from "axios";
 import gameServices from "../../../Services/gameServices";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "",
+  email: "@test.com",
   imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "https://www.eluniversal.com.mx/sites/default/files/2019/11/04/ques-es-un-bot.jpg",
 };
 const navigation = [
   { name: "Dashboard", href: "/DashAdmin", current: true },
@@ -64,6 +64,20 @@ export const AddProduct = () => {
 
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
+  const [who, setWho] = useState();
+
+  useEffect(() => {
+    async function getWho() {
+        const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        setWho(data.username);
+    }
+
+    getWho();
+}, []);
 
   const onChange = (e, save) => {
     save(e.target.value);
@@ -237,10 +251,10 @@ export const AddProduct = () => {
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
-                      {user.name}
+                      {who}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      {user.email}
+                      {who + user.email}
                     </div>
                   </div>
                   <button
