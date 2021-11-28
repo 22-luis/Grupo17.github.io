@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Posts from './Posts';
+import Posts from './myPost'
 
 const PostsOwned= ({username}) => {
     const [posts, setPosts] = useState({

@@ -7,6 +7,7 @@ const PostsContainer = ({username}) => {
         status: 'DONE',
         data: null,
     });
+    const[page, setPage] = useState();
 
     useEffect(() => {
         async function getPosts() {
@@ -22,11 +23,36 @@ const PostsContainer = ({username}) => {
         getPosts();
     }, []);
 
+    async function nextPage() {
+        try {          
+          setPage(page + 1)     
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async function previousPage() {
+        try {          
+          setPage(page - 1)     
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
-        <div className="border-4 border-dashed border-gray-200 rounded-lg h-full m-2 flex flex-wrap justify-center">
-            {
-                posts.data && posts.data.map((it) => <Posts username={username} struct={it} />)
-            }
+        <div>
+            <div className="border-4 border-dashed border-gray-300 rounded-lg h-full m-2 flex flex-wrap justify-center">
+                {
+                    posts.data && posts.data.map((it) => <Posts username={username} struct={it} />)
+                }
+            </div>
+            <div className="flex justify-between">
+            <button className="bg-indigo-800 rounded-full text-white w-20 h-8" onClick={previousPage}>
+                Anterior
+            </button>
+            <button className="bg-indigo-800 rounded-full text-white w-20 h-8" onClick={nextPage}>
+                Siguiente
+            </button>
+            </div>
         </div>
     );
 };
