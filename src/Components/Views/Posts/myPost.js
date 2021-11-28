@@ -2,18 +2,43 @@ import React from "react";
 import axios from 'axios';
 import { useState } from "react";
 import { Modal } from '@material-ui/core'
-import { ThumbUpIcon, AnnotationIcon, EyeIcon, PencilIcon } from "@heroicons/react/solid";
+import { EyeIcon, PencilIcon, XIcon } from "@heroicons/react/solid";
+import { useUserContext } from "../../../Context/UserContext";
 
-
-const Posts = ({ username, struct }) => {
+const Posts = ({ struct }) => {
     const {
-        _id, user, image, title, description, likes, comments, active,
+        _id, user, image, title, description,
     } = struct;
-
-    const [like, setLike] = useState(likes.some(it => it.username === username));
-    const [likesNumber, setLikesNumber] = useState(likes.length);
+    const context = useUserContext();
     const [activeState, setActiveState] = useState();
     const [insert, setInsert] = useState(false);
+    const [titleU, setTitleU] = useState(title);
+    const [descriptionU, setDescriptionU] = useState(description)
+    const [imageU, setImageU] = useState(image)
+
+    const onChange = (e, save) => {
+        save(e.target.value);
+    };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {        const response = await context.verify(titleU);
+            fetch("https://posts-pw2021.herokuapp.com/api/v1/post/update/" + _id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: `title=${titleU}&description=${descriptionU}&image=${imageU}`,
+            })
+                .then((response) => console.log(response))
+                .catch((err) => console.error(err));
+
+                console.log(_id)
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const OpenClose = () => {
         setInsert(!insert);
@@ -25,11 +50,14 @@ const Posts = ({ username, struct }) => {
                     <div>
                         <div className="md:grid md:grid-cols-2 md:gap-6">
                             <div className="mt-5 md:mt-0 md:col-span-2">
-                                <form action="#" method="PUT" /*onSubmit={onSubmit}*/>
+                                <form action="#" method="PUT" onSubmit={onSubmit}>
                                     <div className="shadow sm:rounded-md sm:overflow-hidden">
                                         <div className="px-4 py-5 bg-white space-y-6 sm:p-6 w-80">
                                             <div className="grid grid-cols-3 gap-6">
                                                 <div className="col-span-3 sm:col-span-2">
+                                                    <button>
+                                                        <XIcon className="w-5 h-5 ml-60" onClick={OpenClose} />
+                                                    </button>
                                                     <label
                                                         htmlFor="company-website"
                                                         className="block text-sm font-medium text-gray-700"
@@ -43,6 +71,8 @@ const Posts = ({ username, struct }) => {
                                                             id="company-website"
                                                             className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                                                             placeholder={title}
+                                                            value={titleU}
+                                                            onChange={(e) => onChange(e, setTitleU)}
                                                         />
                                                     </div>
                                                 </div>
@@ -62,19 +92,33 @@ const Posts = ({ username, struct }) => {
                                                         rows={3}
                                                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                                                         placeholder={description}
-                                                        defaultValue={""}
-                                                    /* onChange={(e) => onChange(e, setDescripcion)}*/
+                                                        value={descriptionU}
+                                                        onChange={(e) => onChange(e, setDescriptionU)}
                                                     />
                                                 </div>
-                                                <p className="mt-2 text-sm text-gray-500">
-                                                    Brief description of the product. URLs are
-                                                    hyperlinked.
-                                                </p>
+                                            </div>
+                                            <div>
+                                                <label
+                                                    htmlFor="company-website"
+                                                    className="block text-sm font-medium text-gray-700"
+                                                >
+                                                    Url de imagen
+                                                </label>
+                                                <div className="mt-1 flex rounded-md shadow-sm">
+                                                    <input
+                                                        type="text"
+                                                        name="company-website"
+                                                        id="company-website"
+                                                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                        placeholder={image}
+                                                        value={imageU}
+                                                        onChange={(e) => onChange(e, setImageU)}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                            <button onClick={OpenClose}
-                                                type="submit"
+                                            <button  type="submit" /*onClick={OpenClose}*/
                                                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             >
                                                 Change
@@ -89,28 +133,6 @@ const Posts = ({ username, struct }) => {
             </div>
         </div>
     )
-
-    async function patchLike() {
-        try {
-            const { put } = axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/like/` + _id, null, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
-
-            if (!like) {
-                setLikesNumber(likesNumber + 1);
-                setLike(false);
-            } else {
-
-                setLikesNumber(likesNumber - 1);
-                setLike(true);
-            }
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     async function patchActive() {
         try {
@@ -150,14 +172,6 @@ const Posts = ({ username, struct }) => {
             <div>
                 <h1 className="text-gray-900 italic font-semibold ">{title}</h1>
                 <h4 className="text-gray-700">{description}</h4>
-                <div className="w-full  flex mt-2">
-                    <button type="button" className={`flex justify-center mr-32  text-gray-700 ${like && 'text-indigo-800'}`} onClick={patchLike}>
-                        <ThumbUpIcon className={`w-5 h-5 text-gray-700 ${like && 'text-indigo-800'}`} />Likes {likesNumber}
-                    </button>
-                    <button type="button" className="text-gray-700 flex">
-                        <AnnotationIcon className=" w-5 h-5 text-gray-700" />Comments
-                    </button>
-                </div>
             </div>
             <Modal open={insert} onClose={OpenClose}>
                 {bodyUpdate}
