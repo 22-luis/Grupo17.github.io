@@ -1,7 +1,10 @@
 import React from "react";
-import { useState } from "react";
 import axios from "axios";
-import { ThumbUpIcon, AnnotationIcon, HeartIcon, DotsVerticalIcon } from "@heroicons/react/solid";
+import Comments from "./Comments";
+import AddComments from "./toAddComment";
+import { useState } from "react";
+import { useUserContext } from "../../../Context/UserContext";
+import { ThumbUpIcon, HeartIcon } from "@heroicons/react/solid";
 
 
 const Posts = ({ username, struct }) => {
@@ -9,14 +12,13 @@ const Posts = ({ username, struct }) => {
     const {
         _id, user, image, title, description, likes, comments,
     } = struct;
-
-    const [like, setLike] = useState(likes.some(it => it.username === username ));
+    const [like, setLike] = useState(likes.some(it => it.username === username));
     const [likesNumber, setLikesNumber] = useState(likes.length);
     const [favorite, setFavorite] = useState(false);
 
     async function patchLike() {
         try {
-            const { put } = axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/like/`+ _id, null, {
+            const { put } = axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/like/` + _id, null, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -26,7 +28,7 @@ const Posts = ({ username, struct }) => {
                 setLikesNumber(likesNumber + 1);
                 setLike(true);
             } else {
-      
+
                 setLikesNumber(likesNumber - 1);
                 setLike(false);
             }
@@ -38,7 +40,7 @@ const Posts = ({ username, struct }) => {
 
     async function patchFavorite() {
         try {
-            const { put } = axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/fav/`+ _id, null, {
+            const { put } = axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/fav/` + _id, null, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -55,6 +57,7 @@ const Posts = ({ username, struct }) => {
         }
     }
 
+
     return (
         <div className="flex flex-col bg-gray-300 bg-opacity-30 rounded-2xl w-80 h-full p-4 text-white my-4 ml-3 mr-3">
             <div className="w-full flex space-around font-bold text-black flex-row">
@@ -62,10 +65,7 @@ const Posts = ({ username, struct }) => {
                     {user?.username}
                 </h1>
                 <button type="button" className="ml-24" onClick={patchFavorite}>
-                    <HeartIcon className={` w-5 h-5 text-gray-700 ml-20 ${favorite && 'text-indigo-800' }`} />
-                </button>
-                <button type="button">
-                    <DotsVerticalIcon className=" w-5 h-5 text-gray-700 " />
+                    <HeartIcon className={` w-5 h-5 text-gray-700 ml-20 ${favorite && 'text-indigo-800'}`} />
                 </button>
             </div>
             {
@@ -76,12 +76,16 @@ const Posts = ({ username, struct }) => {
                 <h4 className="text-gray-700">{description}</h4>
                 <div className="w-full  flex mt-2">
                     <button type="button" className={`flex justify-center mr-32  text-gray-700 ${like && 'text-indigo-800'}`} onClick={patchLike}>
-                        <ThumbUpIcon className={`w-5 h-5 text-gray-700 ${like && 'text-indigo-800'}` }/>Likes {likesNumber}
+                        <ThumbUpIcon className={`w-5 h-5 text-gray-700 ${like && 'text-indigo-800'}`} />Likes {likesNumber}
                     </button>
-                    <button type="button" className="text-gray-700 flex">
-                        <AnnotationIcon className=" w-5 h-5 text-gray-700" />Comments 
-                    </button>
+
                 </div>
+            </div>
+            <div className="rounded bg-gray-300 mt-2">
+                < AddComments postId={_id} />
+                {
+                    comments && comments.map((it) => <Comments postId={_id} comment={it} />)
+                }
             </div>
         </div>
     )
