@@ -61,8 +61,8 @@ const Posts = ({ username, struct }) => {
                 <h1 className="w-1/2 text-indigo-800">
                     {user?.username}
                 </h1>
-                <button type="button" className={`ml-24 text-gray-700 ${favorite && 'text-indigo-800'}`} onClick={patchFavorite}>
-                    <HeartIcon className={` w-5 h-5 text-gray-700 ml-32${favorite && 'text-indigo-800' }`} />
+                <button type="button" className="ml-24" onClick={patchFavorite}>
+                    <HeartIcon className={` w-5 h-5 text-gray-700 ml-20 ${favorite && 'text-indigo-800' }`} />
                 </button>
                 <button type="button">
                     <DotsVerticalIcon className=" w-5 h-5 text-gray-700 " />

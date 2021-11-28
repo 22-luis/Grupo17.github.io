@@ -7,6 +7,7 @@ import { DashboardUser } from "./Components/Views/Dashboard/DashboardUser";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import PrivateRoute from "./Components/Router/PrivateRoute";
 import { AddProduct } from "./Components/Views/Product/AddProduct";
+import { Product } from "./Components/Views/Product/Product";
 
 function App({ token, rol }) {
   return (
@@ -28,6 +29,15 @@ function App({ token, rol }) {
           element={
             <PrivateRoute role="admin">
               <AddProduct></AddProduct>
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          exact
+          path="/DashAdmin/Product"
+          element={
+            <PrivateRoute role="admin">
+              <Product />
             </PrivateRoute>
           }
         ></Route>

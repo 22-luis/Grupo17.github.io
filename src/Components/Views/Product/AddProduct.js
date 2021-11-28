@@ -15,7 +15,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
-  { name: "Products", href: "#", current: false },
+  { name: "Products", href: "/DashAdmin/Product", current: false },
   {
     name: "Add New Product",
     href: "/DashAdmin/addProduct",
@@ -52,15 +52,15 @@ export const AddProduct = () => {
 
     const body = Object.fromEntries(formPost.entries());
 
-    if(body.title === '' || body.dexcription === '') return alert('fill the squares');
+    if (body.title === '' || body.dexcription === '') return alert('fill the squares');
 
     const response = await axios.post('https://posts-pw2021.herokuapp.com/api/v1/post/create', { ...body, active: body.active === 'on' }, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
 
-        console.log(response);
+    console.log(response);
   }
 
   return (

@@ -16,7 +16,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
-  { name: "Products", href: "#", current: false },
+  { name: "Products", href: "/DashAdmin/Product", current: false },
   {
     name: "Add New Product",
     href: "#",
@@ -34,17 +34,16 @@ export const DashboardAdmin = () => {
   const [who, setWho] = useState();
 
   useEffect(() => {
-    async function getIdentity() {
+    async function getWho() {
         const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
             headers: {
-                Authorization: `Bearer ${user}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         });
-
         setWho(data.username);
     }
 
-    getIdentity();
+    getWho();
 }, []);
 
   const logout = async (e) => {
@@ -103,6 +102,8 @@ export const DashboardAdmin = () => {
                               navigate("/DashAdmin/addProduct");
                             } if (item.name == "Dashboard") {
                               navigate("/DashAdmin");
+                            } if (item.name == "Product") {
+                              navigate("/DashAdmin/Product");
                             }
                           }}
                         >
