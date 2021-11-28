@@ -66,12 +66,21 @@ export const UserProvider = (props) => {
     setUser(undefined);
   };
 
+  const verifyImg = useCallback( (titulo) => {
+    const verifyImgFetch = async (titulo) => {
+      const response = await useServices.verifyImg(titulo);
+      return response;
+    };
+    return verifyImgFetch(titulo);
+  }, []);
+
   const providerValue = useMemo(() => {
     return {
       user: user,
       login: login,
       token: token,
       logout: logout,
+      verify: verifyImg,
     };
   }, [user, token]);
 

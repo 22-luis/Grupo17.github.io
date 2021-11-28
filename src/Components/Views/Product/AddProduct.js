@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../Context/UserContext";
 import axios from "axios";
 import gameServices from "../../../Services/gameServices";
+import { useState } from "react";
 
 const user = {
   name: "Tom Cook",
@@ -15,16 +16,14 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
-  { name: "Products", href: "/DashAdmin/Product", current: false },
+  { name: "My Products", href: "/DashAdmin/Product", current: false },
   {
     name: "Add New Product",
     href: "/DashAdmin/addProduct",
     current: false,
   },
 ];
-const userNavigation = [
-  { name: "Sign out", href: "#" },
-];
+const userNavigation = [{ name: "Sign out", href: "#" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -45,7 +44,7 @@ export const AddProduct = () => {
     }
   };
 
-  async function onSubmit(e) {
+  /*async function onSubmit(e) {
     e.preventDefault();
 
     const formPost = new FormData(e.target);
@@ -61,7 +60,41 @@ export const AddProduct = () => {
     });
 
     console.log(response);
-  }
+  }*/
+
+  const [titulo, setTitulo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+
+  const onChange = (e, save) => {
+    save(e.target.value);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await context.verify(titulo);
+      console.log(titulo);
+      console.log(descripcion);
+      console.log(response["results"][0]["background_image"]);
+
+      const token = localStorage.getItem("token");
+      const img = response["results"][0]["background_image"];
+
+      fetch("https://posts-pw2021.herokuapp.com/api/v1/post/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization:
+            `Bearer ${token}`,
+        },
+        body: `title=${titulo}&description=${descripcion}&image=${img}`,
+      })
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="min-h-full">
@@ -92,10 +125,11 @@ export const AddProduct = () => {
                           )}
                           aria-current={item.current ? "page" : undefined}
                           onClick={() => {
-                            console.log("estoy presionando -> " + item.name)
+                            console.log("estoy presionando -> " + item.name);
                             if (item.name == "Add New Product") {
                               navigate("/DashAdmin/addProduct");
-                            } if (item.name == "Dashboard") {
+                            }
+                            if (item.name == "Dashboard") {
                               navigate("/DashAdmin");
                             }
                           }}
@@ -146,7 +180,8 @@ export const AddProduct = () => {
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
-                                  )} onClick={logout}
+                                  )}
+                                  onClick={logout}
                                 >
                                   {item.name}
                                 </a>
@@ -265,6 +300,7 @@ export const AddProduct = () => {
                                   id="company-website"
                                   className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                                   placeholder="Call of Duty"
+                                  onChange={(e) => onChange(e, setTitulo)}
                                 />
                               </div>
                             </div>
@@ -285,6 +321,7 @@ export const AddProduct = () => {
                                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                                 placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor you@example.com"
                                 defaultValue={""}
+                                onChange={(e) => onChange(e, setDescripcion)}
                               />
                             </div>
                             <p className="mt-2 text-sm text-gray-500">

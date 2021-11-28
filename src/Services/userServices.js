@@ -46,4 +46,31 @@ export const useServices = {
     }
   },
 
+  verifyImg: async (title) => {
+    try {
+      const config = {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
+          "x-rapidapi-key":
+            "e6f04d311cmsh17b45e1bec7d6e5p1b79f3jsn1ed261ab2fba",
+        },
+      };
+
+      const response = await fetch(
+        `https://rawg-video-games-database.p.rapidapi.com/games?key=bb82783b860242fabe290f20cfb58723&search=${title}/`,
+        config
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("userServices -> data del juego " + data);
+        return data; // url de la imagen del juego solicitado
+      }
+    } catch (error) {
+      console.error(error);
+      return {};
+    }
+  },
+
 };
