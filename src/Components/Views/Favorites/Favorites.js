@@ -9,8 +9,8 @@ import { useState, useEffect } from "react";
 import { FavoritesID } from "./FavoritesID";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "",
+  email: "@test.com",
   imageUrl:
   "https://www.eluniversal.com.mx/sites/default/files/2019/11/04/ques-es-un-bot.jpg",
 };

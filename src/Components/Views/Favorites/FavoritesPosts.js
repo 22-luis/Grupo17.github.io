@@ -1,11 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
 import {
-  ThumbUpIcon,
-  AnnotationIcon,
   HeartIcon,
-  DotsVerticalIcon,
 } from "@heroicons/react/solid";
 
 export const FavoritesPosts = ({ username, struct }) => {
@@ -76,9 +72,6 @@ export const FavoritesPosts = ({ username, struct }) => {
             />
           )}
         </button>
-        <button type="button">
-          <DotsVerticalIcon className=" w-5 h-5 text-gray-700 " />
-        </button>
       </div>
       {image && (
         <img
@@ -91,10 +84,6 @@ export const FavoritesPosts = ({ username, struct }) => {
         <h1 className="text-gray-900 italic font-semibold ">{title}</h1>
         <h4 className="text-gray-700">{description}</h4>
         <div className="w-full  flex mt-2">
-          <button type="button" className="text-gray-700 flex">
-            <AnnotationIcon className=" w-5 h-5 text-gray-700" />
-            Comments
-          </button>
         </div>
       </div>
     </div>
