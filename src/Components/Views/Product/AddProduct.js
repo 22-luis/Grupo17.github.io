@@ -1,11 +1,10 @@
 import React from "react";
-import { Fragment } from "react";
+import { Fragment, Component } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../Context/UserContext";
 import axios from "axios";
-import gameServices from "../../../Services/gameServices";
 import { useState, useEffect } from "react";
 
 const user = {
@@ -15,15 +14,16 @@ const user = {
     "https://www.eluniversal.com.mx/sites/default/files/2019/11/04/ques-es-un-bot.jpg",
 };
 const navigation = [
-  { name: "Dashboard", href: "/DashAdmin", current: true },
-  { name: "My Products", href: "/DashAdmin/Product", current: false },
+  { name: "Inicio", href: "/DashAdmin", current: false },
+  { name: "My Posts", href: "/DashAdmin/Product", current: false },
   {
-    name: "Add New Product",
-    href: "/DashAdmin/addProduct",
-    current: false,
+      name: "Add New Post",
+      href: "/DashAdmin/addProduct",
+      current: true,
   },
+  { name: "Favoritos", href: "#", current: false},
 ];
-const userNavigation = [{ name: "Sign out", href: "/" }];
+const userNavigation = [{ name: "Sign out", href: "#" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -68,16 +68,16 @@ export const AddProduct = () => {
 
   useEffect(() => {
     async function getWho() {
-      const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      setWho(data.username);
+        const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        setWho(data.username);
     }
 
     getWho();
-  }, []);
+}, []);
 
   const onChange = (e, save) => {
     save(e.target.value);
@@ -139,12 +139,15 @@ export const AddProduct = () => {
                           )}
                           aria-current={item.current ? "page" : undefined}
                           onClick={() => {
-                            console.log("estoy presionando -> " + item.name);
-                            if (item.name === "Add New Product") {
+                            console.log("estoy presionando -> " + item.name)
+                            if (item.name == "Add New Post") {
                               navigate("/DashAdmin/addProduct");
-                            }
-                            if (item.name === "Dashboard") {
+                            } if (item.name == "Inicio") {
                               navigate("/DashAdmin");
+                            } if (item.name == "My Posts") {
+                              navigate("/DashAdmin/Product");
+                            } if (item.name == "Favoritos") {
+                              navigate("/DashAdmin/Favoritos");
                             }
                           }}
                         >
@@ -156,14 +159,6 @@ export const AddProduct = () => {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-4 flex items-center md:ml-6">
-                    <button
-                      type="button"
-                      className="bg-indigo-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-3 relative">
                       <div>
@@ -285,7 +280,7 @@ export const AddProduct = () => {
 
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-indigo-600">Dashboard</h1>
+          <h1 className="text-3xl font-bold text-indigo-600">Add New Post</h1>
         </div>
       </header>
       <main>

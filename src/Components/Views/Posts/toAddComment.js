@@ -20,7 +20,17 @@ const AddComments = ({ postId }) => {
             },
         });
 
+        Reload();
     };
+
+    const timeOut = (time) => {
+        return new Promise((resolve) => setTimeout(resolve, time));
+      };
+    
+      async function Reload() {
+        await timeOut(2 * 1000);
+        window.location.reload();
+      }
 
     return (
         <form className="flex flex-wrap m-2" onSubmit={onSubmit}>

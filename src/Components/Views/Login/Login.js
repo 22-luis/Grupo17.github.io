@@ -24,7 +24,7 @@ export const Login = () => {
       const response = await context.login(username, password);
 
       console.log(response);
-      console.log("Login2 response ->" + response);
+      console.log("Login2 response ->"+response);
       setPassword("");
       setUsername("");
     } catch (error) {

@@ -7,7 +7,7 @@ const PostsContainer = ({username}) => {
         status: 'DONE',
         data: null,
     });
-    const[page, setPage] = useState();
+    const[page, setPage] = useState(0);
 
     useEffect(() => {
         async function getPosts() {
@@ -23,16 +23,40 @@ const PostsContainer = ({username}) => {
         getPosts();
     }, []);
 
-    async function nextPage() {
-        try {          
-          setPage(page + 1)     
+    const nextPage = ()=> {
+        try {
+            setPage(page+1);
+            
+            async function getPosts() {
+            const { data: response } = await axios.get(`https://posts-pw2021.herokuapp.com/api/v1/post/all?limit=12&page=${page}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+
+            setPosts({ status: 'DONE', data: response.data });
+            }
+            
+            getPosts();
+          
         } catch (error) {
             console.log(error);
         }
     }
-    async function previousPage() {
+    const previousPage=() => {
         try {          
-          setPage(page - 1)     
+            setPage(page-1);
+            async function getPosts() {
+            const { data: response } = await axios.get(`https://posts-pw2021.herokuapp.com/api/v1/post/all?limit=12&page=${page}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+
+            setPosts({ status: 'DONE', data: response.data });
+            }
+            
+            getPosts();   
         } catch (error) {
             console.log(error);
         }

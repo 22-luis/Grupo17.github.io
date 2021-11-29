@@ -1,48 +1,23 @@
 import React from "react";
-import axios from "axios";
-import Comments from "./Comments";
-import AddComments from "./toAddComment";
 import { useState } from "react";
-import { useUserContext } from "../../../Context/UserContext";
-import { ThumbUpIcon, HeartIcon } from "@heroicons/react/solid";
+import axios from "axios";
+import {
+  ThumbUpIcon,
+  AnnotationIcon,
+  HeartIcon,
+  DotsVerticalIcon,
+} from "@heroicons/react/solid";
 
-const Posts = ({ username, struct }) => {
-  const { _id, user, image, title, description, likes, comments, favorite } =
-    struct;
-  const [like, setLike] = useState(
-    likes.some((it) => it.username === username)
-  );
-  const [likesNumber, setLikesNumber] = useState(likes.length);
-  const [favoriteState, setFavoriteState] = useState(false);
-
-  async function patchLike() {
-    try {
-      const { put } = axios.patch(
-        `https://posts-pw2021.herokuapp.com/api/v1/post/like/` + _id,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-
-      if (!like) {
-        setLikesNumber(likesNumber + 1);
-        setLike(true);
-      } else {
-        setLikesNumber(likesNumber - 1);
-        setLike(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+export const FavoritesPosts = ({ username, struct }) => {
+  const { _id, user, image, title, description, favorite } = struct;
+  //console.log("! " + struct._id);
+  //console.log("! " + struct.user);
+  const [favoriteState, setFavoriteState] = useState(true);
 
   async function patchFavorite() {
     try {
       const token = localStorage.getItem("token");
-      console.log("ID -> " + _id);
+      //console.log("ID -> " + _id);
       fetch(`https://posts-pw2021.herokuapp.com/api/v1/post/fav/${_id}`, {
         method: "PATCH",
         headers: {
@@ -53,14 +28,14 @@ const Posts = ({ username, struct }) => {
         .then((data) => console.log(data))
         .catch((err) => console.error(err));
       /*const { put } = axios.patch(
-            `https://posts-pw2021.herokuapp.com/api/v1/post/fav/` + _id,
-            null,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );*/
+        `https://posts-pw2021.herokuapp.com/api/v1/post/fav/` + _id,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );*/
 
       if (!favoriteState) {
         setFavoriteState(true);
@@ -101,6 +76,9 @@ const Posts = ({ username, struct }) => {
             />
           )}
         </button>
+        <button type="button">
+          <DotsVerticalIcon className=" w-5 h-5 text-gray-700 " />
+        </button>
       </div>
       {image && (
         <img
@@ -113,27 +91,12 @@ const Posts = ({ username, struct }) => {
         <h1 className="text-gray-900 italic font-semibold ">{title}</h1>
         <h4 className="text-gray-700">{description}</h4>
         <div className="w-full  flex mt-2">
-          <button
-            type="button"
-            className={`flex justify-center mr-32  text-gray-700 ${
-              like && "text-indigo-800"
-            }`}
-            onClick={patchLike}
-          >
-            <ThumbUpIcon
-              className={`w-5 h-5 text-gray-700 ${like && "text-blue-500"}`}
-            />
-            Likes {likesNumber}
+          <button type="button" className="text-gray-700 flex">
+            <AnnotationIcon className=" w-5 h-5 text-gray-700" />
+            Comments
           </button>
         </div>
-      </div>
-      <div className="rounded bg-gray-300 mt-2">
-        <AddComments postId={_id} />
-        {comments &&
-          comments.map((it) => <Comments postId={_id} comment={it} />)}
       </div>
     </div>
   );
 };
-
-export default Posts;
