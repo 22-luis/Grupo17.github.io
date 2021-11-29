@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/react-prub/static/css/main.6da732e5.chunk.css",
+    "main.js": "/react-prub/static/js/main.74d56bb7.chunk.js",
+    "main.js.map": "/react-prub/static/js/main.74d56bb7.chunk.js.map",
+    "runtime-main.js": "/react-prub/static/js/runtime-main.3aafa036.js",
+    "runtime-main.js.map": "/react-prub/static/js/runtime-main.3aafa036.js.map",
+    "static/js/2.c4183e3c.chunk.js": "/react-prub/static/js/2.c4183e3c.chunk.js",
+    "static/js/2.c4183e3c.chunk.js.map": "/react-prub/static/js/2.c4183e3c.chunk.js.map",
+    "static/js/3.998ed263.chunk.js": "/react-prub/static/js/3.998ed263.chunk.js",
+    "static/js/3.998ed263.chunk.js.map": "/react-prub/static/js/3.998ed263.chunk.js.map",
+    "index.html": "/react-prub/index.html",
+    "static/css/main.6da732e5.chunk.css.map": "/react-prub/static/css/main.6da732e5.chunk.css.map",
+    "static/js/2.c4183e3c.chunk.js.LICENSE.txt": "/react-prub/static/js/2.c4183e3c.chunk.js.LICENSE.txt",
+    "static/media/lock.275ac523.png": "/react-prub/static/media/lock.275ac523.png",
+    "static/media/login.1386e5b5.jpg": "/react-prub/static/media/login.1386e5b5.jpg",
+    "static/media/logo.6ce24c58.svg": "/react-prub/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3aafa036.js",
+    "static/js/2.c4183e3c.chunk.js",
+    "static/css/main.6da732e5.chunk.css",
+    "static/js/main.74d56bb7.chunk.js"
+  ]
+}
