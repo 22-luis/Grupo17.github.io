@@ -47,7 +47,7 @@ export const Login = () => {
             <div>
               <img
                 className="mx-auto h-12 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                src="https://user-images.githubusercontent.com/62577396/143792370-db8fffb6-e91a-4255-83da-8265025e4beb.png"
                 alt="Workflow"
               />
               <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

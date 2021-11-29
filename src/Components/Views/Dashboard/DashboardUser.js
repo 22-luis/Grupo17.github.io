@@ -74,7 +74,7 @@ export const DashboardUser = () => {
 
   return (
     <div className="min-h-full">
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="bg-indigo-500 rounded-b-lg">
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,8 +83,8 @@ export const DashboardUser = () => {
                   <div className="flex-shrink-0">
                     <img
                       className="h-8 w-8"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                      alt="Workflow"
+                      src="https://user-images.githubusercontent.com/62577396/143792370-db8fffb6-e91a-4255-83da-8265025e4beb.png"
+                      alt="logoWeb"
                     />
                   </div>
                   <div className="hidden md:block">
@@ -95,8 +95,8 @@ export const DashboardUser = () => {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              ? "bg-indigo-600 text-white"
+                              : "text-gray-300 hover:bg-indigo-700 hover:text-white",
                             "px-3 py-2 rounded-md text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
@@ -111,7 +111,7 @@ export const DashboardUser = () => {
                   <div className="ml-4 flex items-center md:ml-6">
                     <button
                       type="button"
-                      className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                      className="bg-indigo-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                     >
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -120,7 +120,7 @@ export const DashboardUser = () => {
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-3 relative">
                       <div>
-                        <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <Menu.Button className="max-w-xs bg-indigo-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
@@ -161,7 +161,7 @@ export const DashboardUser = () => {
                 </div>
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                  <Disclosure.Button className="bg-indigo-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-800 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -182,8 +182,8 @@ export const DashboardUser = () => {
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        ? "bg-indigo-900 text-white"
+                        : "text-gray-300 hover:bg-indigo-700 hover:text-white",
                       "block px-3 py-2 rounded-md text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}
@@ -205,13 +205,13 @@ export const DashboardUser = () => {
                     <div className="text-base font-medium leading-none text-white">
                       {who}
                     </div>
-                    <div className="text-sm font-medium leading-none text-gray-400">
+                    <div className="text-sm font-medium leading-none text-gray-400 mt-2">
                       {who + user.email}
                     </div>
                   </div>
                   <button
                     type="button"
-                    className="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    className="ml-auto bg-indigo-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -223,7 +223,8 @@ export const DashboardUser = () => {
                       key={item.name}
                       as="a"
                       href={item.href}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                      onClick={logout}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-gray-700"
                     >
                       {item.name}
                     </Disclosure.Button>
@@ -237,7 +238,7 @@ export const DashboardUser = () => {
 
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+          <h1 className="text-3xl font-bold text-indigo-600">Dashboard</h1>
         </div>
       </header>
       <main>
