@@ -1,5 +1,5 @@
 import React from "react";
-import { Fragment, Component } from "react";
+import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const navigation = [
     current: false,
   },
 ];
-const userNavigation = [{ name: "Sign out", href: "#" }];
+const userNavigation = [{ name: "Sign out", href: "/" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -68,16 +68,16 @@ export const AddProduct = () => {
 
   useEffect(() => {
     async function getWho() {
-        const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
-        setWho(data.username);
+      const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      setWho(data.username);
     }
 
     getWho();
-}, []);
+  }, []);
 
   const onChange = (e, save) => {
     save(e.target.value);
@@ -140,10 +140,10 @@ export const AddProduct = () => {
                           aria-current={item.current ? "page" : undefined}
                           onClick={() => {
                             console.log("estoy presionando -> " + item.name);
-                            if (item.name == "Add New Product") {
+                            if (item.name === "Add New Product") {
                               navigate("/DashAdmin/addProduct");
                             }
-                            if (item.name == "Dashboard") {
+                            if (item.name === "Dashboard") {
                               navigate("/DashAdmin");
                             }
                           }}

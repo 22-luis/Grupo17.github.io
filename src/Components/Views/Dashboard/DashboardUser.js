@@ -1,5 +1,5 @@
 import React from "react";
-import { Fragment, Component } from "react";
+import { Fragment} from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../../../Context/UserContext";
@@ -16,11 +16,11 @@ const user = {
 };
 
 const navigation = [
-  { name: "Productos", href: "#", current: true },
-  { name: "Favoritos", href: "#", current: false },
+  { name: "Productos", href: "/DashUser", current: true },
+  { name: "Favoritos", href: "/DashUser/Favorite", current: false },
 ];
 const userNavigation = [
-  { name: "Sign out", href: "#" },
+  { name: "Sign out", href: "/" },
 ];
 
 const routes = {
@@ -38,16 +38,16 @@ export const DashboardUser = () => {
 
   useEffect(() => {
     async function getWho() {
-        const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
-        setWho(data.username);
+      const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      setWho(data.username);
     }
 
     getWho();
-}, []);
+  }, []);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -198,7 +198,7 @@ export const DashboardUser = () => {
                     <img
                       className="h-10 w-10 rounded-full"
                       src={user.imageUrl}
-                      alt=""
+                      alt="user image"
                     />
                   </div>
                   <div className="ml-3">
@@ -246,7 +246,7 @@ export const DashboardUser = () => {
           {/* Replace with your content */}
 
 
-          <PostsContainer username={who}/>
+          <PostsContainer username={who} />
 
           <div />
 

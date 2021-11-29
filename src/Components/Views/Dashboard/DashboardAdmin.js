@@ -1,10 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, Component } from "react";
+import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import PostsContainer from "../Posts/renderPost";
 
@@ -23,7 +23,7 @@ const navigation = [
     current: false,
   },
 ];
-const userNavigation = [{ name: "Sign out", href: "#" }];
+const userNavigation = [{ name: "Sign out", href: "/" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -35,16 +35,16 @@ export const DashboardAdmin = () => {
 
   useEffect(() => {
     async function getWho() {
-        const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
-        setWho(data.username);
+      const { data } = await axios.get('https://posts-pw2021.herokuapp.com/api/v1/auth/whoami', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      setWho(data.username);
     }
 
     getWho();
-}, []);
+  }, []);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -98,11 +98,11 @@ export const DashboardAdmin = () => {
                           aria-current={item.current ? "page" : undefined}
                           onClick={() => {
                             console.log("estoy presionando -> " + item.name)
-                            if (item.name == "Add New Product") {
+                            if (item.name === "Add New Product") {
                               navigate("/DashAdmin/addProduct");
-                            } if (item.name == "Dashboard") {
+                            } if (item.name === "Dashboard") {
                               navigate("/DashAdmin");
-                            } if (item.name == "Product") {
+                            } if (item.name === "Product") {
                               navigate("/DashAdmin/Product");
                             }
                           }}
@@ -230,8 +230,8 @@ export const DashboardAdmin = () => {
                       key={item.name}
                       as="a"
                       href={item.href}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-indigo-700"
-                    >
+                      className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-indigo-700">
+                        
                       {item.name}
                     </Disclosure.Button>
                   ))}
@@ -251,8 +251,8 @@ export const DashboardAdmin = () => {
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {/* Replace with your content */}
           <div className="px-4 py-6 sm:px-0">
-        
-            <PostsContainer username={who}/>
+
+            <PostsContainer username={who} />
           </div>
           {/* /End replace */}
         </div>

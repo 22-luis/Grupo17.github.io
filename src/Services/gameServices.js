@@ -21,10 +21,10 @@ filtroG.addEventListener( "submit", function(event){
         console.log("Soy newgame.genero" + data[1].genero)
         console.log("Soy generoF" + generoF)
 
-        if(generoF == 'Sin filtro'){
+        if(generoF === 'Sin filtro'){
                 renderGame();
         } else{
-                var newdata = data.filter( g => g.genero ==generoF )
+                var newdata = data.filter( g => g.genero === generoF )
                 console.log("Soy la vieja data"+data)
                 console.log("Soy la nueva data"+newdata)
                 localStorage.removeItem('filtroGenero');

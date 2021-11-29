@@ -3,13 +3,11 @@ import axios from 'axios';
 import { useState } from "react";
 import { Modal } from '@material-ui/core'
 import { EyeIcon, PencilIcon, XIcon } from "@heroicons/react/solid";
-import { useUserContext } from "../../../Context/UserContext";
 
 const Posts = ({ struct }) => {
     const {
         _id, user, image, title, description,
     } = struct;
-    const context = useUserContext();
     const [activeState, setActiveState] = useState();
     const [insert, setInsert] = useState(false);
     const [titleU, setTitleU] = useState(title);
@@ -22,7 +20,7 @@ const Posts = ({ struct }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        try {        const response = await context.verify(titleU);
+        try {        
             fetch("https://posts-pw2021.herokuapp.com/api/v1/post/update/" + _id, {
                 method: "PUT",
                 headers: {

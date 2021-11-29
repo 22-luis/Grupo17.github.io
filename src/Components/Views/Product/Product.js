@@ -1,5 +1,5 @@
 import React from "react";
-import { Fragment, Component } from "react";
+import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +24,7 @@ const navigation = [
     },
 ];
 const userNavigation = [
-    { name: "Sign out", href: "#" },
+    { name: "Sign out", href: "/" },
 ];
 
 function classNames(...classes) {
@@ -108,9 +108,9 @@ export const Product = () => {
                                                     aria-current={item.current ? "page" : undefined}
                                                     onClick={() => {
                                                         console.log("estoy presionando -> " + item.name)
-                                                        if (item.name == "Add New Product") {
+                                                        if (item.name === "Add New Product") {
                                                             navigate("/DashAdmin/addProduct");
-                                                        } if (item.name == "Dashboard") {
+                                                        } if (item.name === "Dashboard") {
                                                             navigate("/DashAdmin");
                                                         }
                                                     }}

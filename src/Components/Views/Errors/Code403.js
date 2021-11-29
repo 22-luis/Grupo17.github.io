@@ -12,7 +12,7 @@ export const Code403 = () => {
       />
       <div className="bg-gray-100 h-screen justify-center">
         <center className="mt-2 m-auto">
-          <img className="emoji-403" src={lock}/>
+          <img className="emoji-403" src={lock} alt="Lock"/>
           <div className=" tracking-widest mt-4">
             <span className="text-gray-500 text-6xl block">
               <span>4 0 3</span>

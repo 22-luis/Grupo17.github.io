@@ -3,7 +3,6 @@ import axios from "axios";
 import Comments from "./Comments";
 import AddComments from "./toAddComment";
 import { useState } from "react";
-import { useUserContext } from "../../../Context/UserContext";
 import { ThumbUpIcon, HeartIcon } from "@heroicons/react/solid";
 
 
@@ -18,7 +17,7 @@ const Posts = ({ username, struct }) => {
 
     async function patchLike() {
         try {
-            const { put } = axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/like/` + _id, null, {
+            await axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/like/` + _id, null, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -40,7 +39,7 @@ const Posts = ({ username, struct }) => {
 
     async function patchFavorite() {
         try {
-            const { put } = axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/fav/` + _id, null, {
+            await axios.patch(`https://posts-pw2021.herokuapp.com/api/v1/post/fav/` + _id, null, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
